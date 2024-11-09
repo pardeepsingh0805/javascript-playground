@@ -8,35 +8,151 @@
     <title>Progress Tracker</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="margin-top: 15%;">
+        <div class="mt-3">
+            <h4>Form Progress:</h4>
+            <ul id="checklist" class="list-group">
+                <!-- Steps will be dynamically added here -->
+            </ul>
+        </div>
         <section class="progress-bar">
-
+            <div class="progress" style="height: 30px;">
+                <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
         </section>
+
+
         <form method="POST" enctype="multipart/form-data" action="#">
-            <div class="container">
+            <!-- Step 1 -->
+            <div class="container mt-5" id="step-1">
                 <div class="form-control">
-                    <h3>Progress Tracker</h3>
-                    <input type="text" id="name" name="name" placeholder="First Name" class="form-control" required>
-                    <input type="text" id="slug" name="slug" class="form-control mt-2" placeholder="Last Name" required>
+                    <h3>Create profile</h3>
+                    <div class=" row">
+                        <div class="col-md-6">
+                            <input type="text" id="name" name="name" placeholder="First Name" class="form-control step" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="slug" name="slug" class="form-control" placeholder="Last Name step" required>
+                        </div>
+                    </div>
                     <div class="form-group mt-3 mb-3">
                         <label for="location">Gender:</label>
-                        <select id="location" name="location" class="form-control" required>
+                        <select id="location" name="location" class="form-control step" required>
                             <option selected>Select:</option>
                             <option value="1">Male</option>
                             <option value="2">Female</option>
                             <option value="3">Binary</option>
-                            <option value="3">Non-Binary</option>
+                            <option value="4">Non-Binary</option>
+                            <option value="5">Other</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="formFile" class="form-label"></label>
-                        <input class="form-control" type="file" id="formFile">
-                      </div>   
-                      <div class="form-group">
-                        <label for="checkedBox" class="form-label"></label>
-                      </div>                   
+                        <label for="formFile" class="form-label">upload a photo</label>
+                        <input class="form-control step" type="file" id="formFile">
+                    </div>   
+                    <div class="form-group">
+                    </div>    
+                    <div class="form-group d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+                    </div>             
                 </div>
             </div>
+            <!-- Step 2 -->
+             <div class="container d-none" id ="step-2">
+                <div class="form-control">
+                    <h3> Address Details</h3>
+                    <div class="form-group">
+                        <div class="row mt-2">
+                           <div class="col-auto">
+                            <label class="form-label" for="addressLine1" >Address Line 1:</label>
+                           </div>
+                           <div class="col-md-8">
+                            <input class="form-control step" type="text" id="addressLine1" name="addressLine1" placeholder="123 example road">
+                           </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-auto">
+                                <label class="form-label step" for="addressLine2" >Address Line 2:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control step" type="text" id="addressLine2" name="addressLine2" placeholder=" 456 example ave">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <label class="form-label" for="Country" >Country:</label>
+                                <input class="form-control step" type="text" id="Country" name="Country" placeholder="Canada">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12 col-md-6">
+                                <input class="form-control step" type="text" id="city" name="city" placeholder="City Name">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <input class="form-control step" type="text" id="province" name="province" placeholder="Province Name">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between w-100 mt-2">
+                            <button type="button" onclick="prevStep()" class="btn btn-primary">Previous</button>
+                            <button type="button" onclick="nextStep()" class="btn btn-primary">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+             </div>
+             <!-- Step 3 -->
+              <div class="container d-none" id="step-3">
+                    <div class="form-control">
+                        <h3>Communication  Details</h3>
+                        <div class="form-group">
+                            <div class="row mt-2">
+                                <div class="col-12 col-md-6">
+                                    <input class="form-control step" type="text" id="email" name="email" placeholder="email@example.com">
+                                </div>
+                                <div class="col-col-12 col-md-6">
+                                    <input class="form-control step" type="text" id="phone" name="phone" placeholder="(123) 456-7890">
+                                </div>
+                            </div>
+                            <div class=" row mt-2">
+                                <div class="col-12 col-md-4">
+                                    <input class="form-control step" type="text" id="facebookLink" name="facebookLink" placeholder="https://www.facebook.com/@username">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <input class="form-control step" type="text" id="twitterLink" name="twitter" placeholder="Twitter Profile URL">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <input class="form-control step" type="text" id="InstagramLink" name="Instagram" placeholder="Instagram Profile URL">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between w-100 mt-2">
+                            <button type="button" onclick="prevStep()" class="btn btn-primary">Previous</button>
+                            <button type="button" onclick="nextStep()" class="btn btn-primary">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 4 -->
+                 <div class="container d-none" id="step-4">
+                    <div class="form-control">
+                        <h3> Companion details</h3>
+                        <div class="form-group">
+                            <div class="row mt-2">
+                                <div class="col-12 col-md-6">
+                                    <input class="form-control step" type="number" id="no_of_people" name="no_of_people" placeholder=" Number of people" min="1">
+                                </div>
+                                <div id="detailForms"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between w-100 mt-2">
+                            <button type="button" onclick="prevStep()" class="btn btn-primary">Previous</button>
+                            <button type="button" class="btn btn-primary">submit</button>
+                        </div>
+                    </div>
+                 </div>
+                 <!-- Step 5 -->
+                  <div class="container d-none" id="step-5"></div>
+              </div>
+
         </form>
 
     </div>
@@ -49,5 +165,8 @@
 
     <!-- Bootstrap javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Progress bar javascript -->
+     <script src="./progressTracker.js"></script>
+
 </body>
 </html>
